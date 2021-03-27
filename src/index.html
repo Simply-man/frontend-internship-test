@@ -15,7 +15,18 @@
       <!-- Display success message below -->
     </section>
     <div class="popup">
-      <!-- Here goes your popup form HTML code -->
+      <button id="close-popup-form" class="btn-popup-close"></button>
+      <p class="popup-title">Login</p>
+      <form id="login-form" class="form-popup">
+        <input type="email" name="email" id="email" class="email-popup" placeholder="E-mail">
+        <input type="password" name="password" id="password" class="password-popup" placeholder="Password">
+       <label class="container-checkbox-popup">
+         <span>I agree to trems & conditions.</span>
+        <input type="checkbox">
+        <span class="checkmark"></span>
+      </label>
+        <button id="btn-submit" class="btn-popup-submit" type="submit">SUBMIT</button>
+      </form>
     </div>
     <script src="js/index.min.js" charset="utf-8"></script>
   </body>

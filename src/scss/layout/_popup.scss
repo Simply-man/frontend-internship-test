@@ -1,0 +1,75 @@
+@mixin transformRotate($angle) {
+    -webkit-transform: rotate($angle);
+    -ms-transform: rotate($angle);
+    transform: rotate($angle);
+}
+
+.popup {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    min-width: 42vh;
+    background-color: #fff;
+    border-radius: 2%;
+    margin: auto;
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  
+    &-title{
+      font-family:  "Lobster", cursive;
+      font-size: 2rem;
+      font-weight: bold;
+      margin-top: 4rem;
+      line-height: 0.1rem;
+    }
+}
+
+.btn-popup-submit {
+    padding: 1rem;
+    background-color:#000;
+    color: white;
+    text-align: center;
+    border: 0;
+    margin: 2rem 0 3rem 0;
+    cursor: pointer;
+    outline: none;
+}
+
+.btn-popup-close {
+    min-width: 2.2rem;
+    min-height: 2.2rem;
+    position: absolute;
+    right: -2%;
+    top: -2%;
+    border-radius: 50%;
+    background-color: #000;
+    color: #fff;
+    border: none;  
+    cursor: pointer;
+    outline: none;
+  
+    &::before,
+    &::after{
+      content: "";
+      display: block;
+      position: absolute;
+      min-height: 1rem;
+      background-color: #fff;
+      top: .5rem;
+      left: 1rem;
+      border-radius: 1px;
+      padding: 2px;
+    }
+  
+    &::before{
+        @include transformRotate(135deg)
+    }
+  
+    &::after{
+        @include transformRotate(45deg)
+    }
+  }
+  
