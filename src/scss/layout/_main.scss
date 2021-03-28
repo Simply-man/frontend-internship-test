@@ -1,6 +1,7 @@
 // Main styles
 $primary-color: #fcaf32;
 $secondary-color: #fc888e;
+$lobster-font-cursive: "Lobster", cursive;
 
 html,
 body {
@@ -22,7 +23,7 @@ body {
   background: transparent;
   border: 0;
   cursor: pointer;
-  font-family: 'Lobster', cursive;
+  font-family: $lobster-font-cursive;
   font-size: 42px;
   height: 60px;
   outline: none;
@@ -32,6 +33,11 @@ body {
   &:hover {
     transform: scale(1.15);
   }
+}
+
+.submit-info {
+  font-family: $lobster-font-cursive;
+  font-size: 42px;
 }
 
 .form-popup-error {

@@ -1,9 +1,11 @@
 // Get a reference to the buttons and popup elements
 const body = window.document.querySelector("body");
+const main = body.querySelector(".main");
 const showPopUpBtn = document.getElementById("show-popup-form");
 const closePopUpBtn = document.getElementById("close-popup-form");
 const popUp = document.querySelector(".popup");
 const formPopup = popUp.querySelector("#login-form");
+const btnSubmit = formPopup["btn-submit"];
 const regexEmail = /[^@ \t\r\n]+@[^@ \t\r\n]+\.[^@ \t\r\n]/;
 const regexPassword = /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$ %^&*-]).{8,}$/;
 
@@ -18,23 +20,37 @@ closePopUpBtn.addEventListener('click', () => {
 })
 
 // addEventListener for submit form
-formPopup.addEventListener("submit", e =>{
+formPopup.addEventListener("submit", (e) => {
     e.preventDefault();
     if(!handleSubmit(e)) return;
 })
-
-
+    
+    
 // Show Error popup when validation failed
 const showErrorPopup = (info) =>{
-    const errorDiv = document.createElement("div");
+        const errorDiv = document.createElement("div");
+        
+        errorDiv.classList.add("form-popup-error");
+        errorDiv.textContent = info
+        
+        body.appendChild(errorDiv);
+        
+        setTimeout(()=>{
+            body.removeChild(errorDiv);
+    }, 3000)
+}
 
-    errorDiv.classList.add("form-popup-error");
-    errorDiv.textContent = info
+// Close popup and display thank you
+const successSubmit = () => {
+    btnSubmit.disabled = true;
+    const successDiv = document.createElement("div");
 
-    body.appendChild(errorDiv);
-
-    setTimeout(()=>{
-        body.removeChild(errorDiv);
+    setTimeout(() => {
+        popUp.style.removeProperty("display");
+        main.removeChild(showPopUpBtn);
+        successDiv.classList.add("submit-info");
+        successDiv.textContent = "Thank you!"
+        main.appendChild(successDiv);
     }, 3000)
 }
 
@@ -43,7 +59,7 @@ const validateInputs = (element) => {
     const emailValue = element.email.value;
     const passwordValue = element.password.value;
     const checboxChecked = element.checkbox.checked;
-   
+    
     
     if (!emailValue && !passwordValue){
         showErrorPopup("Please fill the email and password!")
@@ -54,7 +70,7 @@ const validateInputs = (element) => {
         showErrorPopup("Please provide correct email address!")
         return false
     }
-
+    
     if(!regexPassword.test(passwordValue)) {
         showErrorPopup("Password should contain: Minimum 8 character. At least 1 upper and 1 lower case English letter. 1 number and 1 special character")
         return false
@@ -64,13 +80,14 @@ const validateInputs = (element) => {
         showErrorPopup("Please accepts terms & conditions!")
         return false
     }
-
+    
     return true
 }
 
 // handle submit form
 const handleSubmit = (e) =>{
     const valid = validateInputs(e.target)
+    if(valid) successSubmit();
     return valid
 }
 
